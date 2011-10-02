@@ -2,6 +2,7 @@
 #include <stdlib.h>
 
 int main() {
-	printf("Hello peichaaaaaaaaaaaaa");
+	printf("Hello students");
 	system("PAUSE");
+	return 0;
 }
