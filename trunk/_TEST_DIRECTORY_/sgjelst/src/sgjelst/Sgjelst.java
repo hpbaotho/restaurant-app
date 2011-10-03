@@ -14,7 +14,8 @@ public class Sgjelst {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        System.out.println("Hellghuigruio World");
+        System.out.println("Hello World");
         System.err.println("whuuuuuuuuuut");
+        
     }
 }
