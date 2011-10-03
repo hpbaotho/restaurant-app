@@ -2,8 +2,8 @@
 #include <stdlib.h>
 
 int main() {
-	printf("Hello class");
+	printf("Hello AMIGOS!!");
 	printf("Hello students");
 	system("PAUSE");
-	return 1;
+	return 0;
 }
