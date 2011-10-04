@@ -14,7 +14,8 @@ public class AhmetTerje {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        System.out.println("Hello students");
+        System.out.println("Hello stuents");
         System.out.println("heisann");
+        System.out.println("this is just a small  update");
     }
 }
