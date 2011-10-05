@@ -1,5 +1,15 @@
+Import java.util.Scanner;
+
 class HelloWorld {
+
+	private Scanner s;
+
     public static void main(String[] args) {
+
+	s = new Scanner(System.in);
+	
+	System.out.println("You just wrote: " + s.nextLine());
+
         System.out.println("Hello Anders");
         System.out.println("Another print");
         int[] numbers = {1, 2, 5, 14, 356};
