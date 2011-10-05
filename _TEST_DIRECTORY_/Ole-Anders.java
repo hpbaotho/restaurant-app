@@ -8,5 +8,6 @@ class HelloWorld {
 //        trying again
 	
 	System.out.println("Keep Trying!);
+	System.out.print("woha!");
     }
 }
