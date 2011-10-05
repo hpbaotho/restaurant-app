@@ -18,6 +18,8 @@ class HelloWorld {
 //        trying again
 	
 	System.out.println("Keep Trying!);
-	System.out.print("woha!");
+	System.out.print("woha!"); 
+
+//satser på jeg har skrivi koden for Scanner rett nå da, du får se anders ;)
     }
 }
