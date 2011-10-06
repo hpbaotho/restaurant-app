@@ -20,9 +20,9 @@ public class CalendarApp {
     private int yearNow;
     private Calendar calendar;
     private SimpleDateFormat dateFormat;
-    private int[][] visualDays;
-    private Map<Month, int[][]> visualMonths;
-    private Map<Month, Map> visualYears;
+    private int[][] dayArray;
+    private Map<Month, int[][]> monthMap;
+    private Map<String, Map> yearMap;
 
     public CalendarApp() {
         dateNow = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
@@ -31,9 +31,9 @@ public class CalendarApp {
         calendar = new GregorianCalendar(START_YEAR, START_MONTH, START_DATE);
         calendar.setFirstDayOfWeek(Calendar.MONDAY);
         dateFormat = new SimpleDateFormat("dd MMM yyyy");
-        visualDays = new int[6][7];
-        visualMonths = new HashMap<>();
-        visualYears = new HashMap<>();
+        dayArray = new int[6][7];
+        monthMap = new HashMap<>();
+        yearMap = new HashMap<>();
     }
 
     private void setUpCalendar(int day, int month, int year) {
@@ -101,13 +101,14 @@ public class CalendarApp {
             int week = calendar.get(Calendar.WEEK_OF_YEAR);
             for (int j = 0; j < 7; j++) {
                 if ((calendar.get(Calendar.DAY_OF_WEEK) + 5) % 7 == j) {
-                    visualDays[i][j] = calendar.get(Calendar.DAY_OF_MONTH);
+                    dayArray[i][j] = calendar.get(Calendar.DAY_OF_MONTH);
                     calendar.add(Calendar.DAY_OF_MONTH, 1);
                 } else
-                    visualDays[i][j] = 0;
+                    dayArray[i][j] = 0;
             }
-            System.out.printf(format, week, visualDays[i][0], visualDays[i][1], visualDays[i][2], visualDays[i][3], visualDays[i][4], visualDays[i][5], visualDays[i][6]);
+            System.out.printf(format, week, dayArray[i][0], dayArray[i][1], dayArray[i][2], dayArray[i][3], dayArray[i][4], dayArray[i][5], dayArray[i][6]);
         }
+        monthMap.put(m, dayArray);
     }
     
     public void printMonth(int mon, int year) {
@@ -121,6 +122,7 @@ public class CalendarApp {
     public void printYear(int year) {
         for (int i = 0; i < 12; i++)
             printMonth(i, year);
+        yearMap.put(year + "", monthMap);
     }
 
     public void printLongDate() {
