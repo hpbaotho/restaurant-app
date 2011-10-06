@@ -55,14 +55,11 @@ public class CalendarApp {
         yearNow = calendar.get(Calendar.YEAR);
     }
     
-    public Month monthSwitch(int m) {
-        int mon;
+    private Month monthSwitch(int m) {
         if(m == -1)
-            mon = monthNow;
-        else
-            mon = m;
+            m = monthNow;
         Month month = null;
-        switch(mon) {
+        switch(m) {
             case 0: month = Month.JANUARY; break;
             case 1: month = Month.FEBRUARY; break;
             case 2: month = Month.MARCH; break;
@@ -80,11 +77,11 @@ public class CalendarApp {
         return month;
     }
     
-    private void printCurrentMonth() {
+    public void printCurrentMonth() {
         printMonth(monthSwitch(-1), yearNow);
     }
     
-    private void printMonth(Month m, int year) {
+    public void printMonth(Month m, int year) {
         setNow();
         if(year == 0)
             year = calendar.get(Calendar.YEAR);
@@ -92,16 +89,18 @@ public class CalendarApp {
             calendar.set(Calendar.YEAR, year);
         calendar.set(Calendar.MONTH, m.ordinal());
         calendar.set(Calendar.DAY_OF_MONTH, 1);
+        while(calendar.get(Calendar.DAY_OF_WEEK) != 2)
+            calendar.add(Calendar.DAY_OF_MONTH, -1);
         String format = "|%3s ||%3d |%3d |%3d |%3d |%3d |%3d |%3d |\n";
-        System.out.print("|----------------------------------------|\n"
+        System.out.println("|----------------------------------------|\n"
                 + "|" + m.toPaddedString(year) + "|\n"
                 + "|----------------------------------------|\n"
                 + "|Week|| Mo | Tu | We | Th | Fr | Sa | Su |\n"
-                + "|----||----|----|----|----|----|----|----|\n");
+                + "|----||----|----|----|----|----|----|----|");
         for (int i = 0; i < 6; i++) {
             int week = calendar.get(Calendar.WEEK_OF_YEAR);
             for (int j = 0; j < 7; j++) {
-                if ((calendar.get(Calendar.DAY_OF_WEEK) + 5) % 7 == j && calendar.get(Calendar.MONTH) == m.ordinal()) {
+                if ((calendar.get(Calendar.DAY_OF_WEEK) + 5) % 7 == j) {
                     visualDays[i][j] = calendar.get(Calendar.DAY_OF_MONTH);
                     calendar.add(Calendar.DAY_OF_MONTH, 1);
                 } else
@@ -111,34 +110,29 @@ public class CalendarApp {
         }
     }
     
-    private void printMonth(int mon, int year) {
+    public void printMonth(int mon, int year) {
         printMonth(monthSwitch(mon), year);
     }
     
-    private void printCurrentYear() {
+    public void printCurrentYear() {
         printYear(0);
     }
     
-    private void printYear(int year) {
-        for (int i = 0; i < 12; i++) {
+    public void printYear(int year) {
+        for (int i = 0; i < 12; i++)
             printMonth(i, year);
-        }
     }
 
-    private void printLongDate() {
+    public void printLongDate() {
         System.out.println(dateFormat.format(calendar.getTime()));
     }
     
-    private void printShortDate() {
+    public void printShortDate() {
         int date = calendar.get(Calendar.DAY_OF_MONTH);
         int month = calendar.get(Calendar.MONTH) + 1;
         int year = calendar.get(Calendar.YEAR);
         
         System.out.printf("%02d.%02d.%4d\n", date, month, year);
-    }
-
-    private void printCalendar() {
-        
     }
 
     /**
