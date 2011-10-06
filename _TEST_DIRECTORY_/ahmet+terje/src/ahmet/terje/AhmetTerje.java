@@ -17,5 +17,6 @@ public class AhmetTerje {
         System.out.println("Hello stuents");
         System.out.println("heisann");
         System.out.println("this is just a small  update");
+        System.out.println("en liten torsdags tekst");
     }
 }
