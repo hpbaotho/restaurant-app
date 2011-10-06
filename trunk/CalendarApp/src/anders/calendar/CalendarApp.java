@@ -86,13 +86,15 @@ public class CalendarApp {
     
     private void printMonth(Month m, int year) {
         setNow();
-        if(year > 0)
+        if(year == 0)
+            year = calendar.get(Calendar.YEAR);
+        else
             calendar.set(Calendar.YEAR, year);
         calendar.set(Calendar.MONTH, m.ordinal());
         calendar.set(Calendar.DAY_OF_MONTH, 1);
         String format = "|%3s ||%3d |%3d |%3d |%3d |%3d |%3d |%3d |\n";
         System.out.print("|----------------------------------------|\n"
-                + "|" + m.toPaddedString() + "|\n"
+                + "|" + m.toPaddedString(year) + "|\n"
                 + "|----------------------------------------|\n"
                 + "|Week|| Mo | Tu | We | Th | Fr | Sa | Su |\n"
                 + "|----||----|----|----|----|----|----|----|\n");
