@@ -27,8 +27,8 @@ public enum Month {
     private Month(int standard, int leap) {
         this.standard = standard;
         this.leap = leap;
-        trailingSpaces = (40 - super.toString().length()) / 2;
-        leadingSpaces = 40 - super.toString().length() - trailingSpaces;
+        trailingSpaces = (35 - super.toString().length()) / 2;
+        leadingSpaces = 35 - super.toString().length() - trailingSpaces;
     }
     
     private Month(int days) {
@@ -42,11 +42,11 @@ public enum Month {
             return standard;
     }
     
-    public String toPaddedString() {
+    public String toPaddedString(int year) {
         String retVal = "";
         for(int i = 0; i < leadingSpaces; i++)
             retVal += " ";
-        retVal += toString();
+        retVal += toString() + " " + year;
         for(int i = 0; i < trailingSpaces; i++)
             retVal += " ";
         return retVal;
@@ -57,11 +57,11 @@ public enum Month {
         return month.charAt(0) + month.substring(1).toLowerCase();
     }
     
-    public String toPaddedStringUpper() {
+    public String toPaddedStringUpper(int year) {
         String retVal = "";
         for(int i = 0; i < leadingSpaces; i++)
             retVal += " ";
-        retVal += super.toString();
+        retVal += super.toString() + " " + year;
         for(int i = 0; i < trailingSpaces; i++)
             retVal += " ";
         return retVal;
