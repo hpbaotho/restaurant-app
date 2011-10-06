@@ -81,25 +81,7 @@ public class CalendarApp {
     }
     
     private void printCurrentMonth() {
-        setNow();
-        calendar.set(Calendar.DAY_OF_MONTH, 1);
-        Month month = monthSwitch(-1);
-        String format = "|%3s ||%3d |%3d |%3d |%3d |%3d |%3d |%3d |\n";
-        System.out.print("|----------------------------------------|\n"
-                + "|" + month.toPaddedString() + "|\n"
-                + "|----------------------------------------|\n"
-                + "|Week|| Mo | Tu | We | Th | Fr | Sa | Su |\n"
-                + "|----||----|----|----|----|----|----|----|\n");
-        for (int i = 0; i < 6; i++) {
-            int week = calendar.get(Calendar.WEEK_OF_YEAR);
-            for (int j = 0; j < 7; j++) {
-                if ((calendar.get(Calendar.DAY_OF_WEEK) + 5) % 7 == j && calendar.get(Calendar.MONTH) == month.ordinal()) {
-                    visualDays[i][j] = calendar.get(Calendar.DAY_OF_MONTH);
-                    calendar.add(Calendar.DAY_OF_MONTH, 1);
-                }
-            }
-            System.out.printf(format, week, visualDays[i][0], visualDays[i][1], visualDays[i][2], visualDays[i][3], visualDays[i][4], visualDays[i][5], visualDays[i][6]);
-        }
+        printMonth(monthSwitch(-1), yearNow);
     }
     
     private void printMonth(Month m, int year) {
@@ -128,28 +110,16 @@ public class CalendarApp {
     }
     
     private void printMonth(int mon, int year) {
-        setNow();
-        if(year > 0)
-            calendar.set(Calendar.YEAR, year);
-        calendar.set(Calendar.MONTH, mon);
-        calendar.set(Calendar.DAY_OF_MONTH, 1);
-        Month m = monthSwitch(mon);
-        String format = "|%3s ||%3d |%3d |%3d |%3d |%3d |%3d |%3d |\n";
-        System.out.print("|----------------------------------------|\n"
-                + "|" + m.toPaddedString() + "|\n"
-                + "|----------------------------------------|\n"
-                + "|Week|| Mo | Tu | We | Th | Fr | Sa | Su |\n"
-                + "|----||----|----|----|----|----|----|----|\n");
-        for (int i = 0; i < 6; i++) {
-            int week = calendar.get(Calendar.WEEK_OF_YEAR);
-            for (int j = 0; j < 7; j++) {
-                if ((calendar.get(Calendar.DAY_OF_WEEK) + 5) % 7 == j && calendar.get(Calendar.MONTH) == m.ordinal()) {
-                    visualDays[i][j] = calendar.get(Calendar.DAY_OF_MONTH);
-                    calendar.add(Calendar.DAY_OF_MONTH, 1);
-                } else
-                    visualDays[i][j] = 0;
-            }
-            System.out.printf(format, week, visualDays[i][0], visualDays[i][1], visualDays[i][2], visualDays[i][3], visualDays[i][4], visualDays[i][5], visualDays[i][6]);
+        printMonth(monthSwitch(mon), year);
+    }
+    
+    private void printCurrentYear() {
+        printYear(0);
+    }
+    
+    private void printYear(int year) {
+        for (int i = 0; i < 12; i++) {
+            printMonth(i, year);
         }
     }
 
@@ -174,10 +144,7 @@ public class CalendarApp {
      */
     public static void main(String[] args) {
         CalendarApp c = new CalendarApp();
-        c.printCurrentMonth();
-        c.printMonth(Month.MAY, 0);
-        c.printMonth(Month.MAY, 2010);
-        c.printMonth(5, 2012);
-        c.printMonth(5, 0);
+        c.printCurrentYear();
+        c.printYear(2012);
     }
 }
