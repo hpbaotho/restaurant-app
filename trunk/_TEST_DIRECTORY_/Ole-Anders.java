@@ -21,5 +21,6 @@ class HelloWorld {
 	System.out.print("woha!"); 
 
 //satser på jeg har skrivi koden for Scanner rett nå da, du får se anders ;)
+//glemt av å oppdatere tidligere, slenger inn et testprosjekt litt seinere i kveld/natt ;)
     }
 }
