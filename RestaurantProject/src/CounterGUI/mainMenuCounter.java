@@ -14,7 +14,7 @@ import javax.swing.*;
  */
 
 //TODO-list:
-//calendar
+//calendar (show today button will be in the calendar panel)
 //bind jpanetabs to change new table (DB conn?)
 //addReservation
 
