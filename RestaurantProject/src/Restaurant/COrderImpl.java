@@ -4,7 +4,7 @@ package Restaurant;
  *
  * @author Rush
  */
-public class COrder {
+public class COrderImpl implements COrder {
     private int orderID;
     private int restaurantID;
     private String customer;
@@ -14,7 +14,7 @@ public class COrder {
     private boolean paymentRecieved;
 
     
-    public COrder (int orderID, int restaurantID, String customer, int cTableID,
+    public COrderImpl (int orderID, int restaurantID, String customer, int cTableID,
             int orderStart, int waiterID, boolean paymentRecieved){
         this.orderID = orderID;
         this.restaurantID = restaurantID;

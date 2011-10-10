@@ -4,14 +4,14 @@ package Restaurant;
  * 
  * @author Rush
  */
-public class Dish {
+public class DishImpl implements Dish {
     private int orderID;
     private int menuItemID;
     private int sizeID;
     private int number;
     private String details;
 
-    public Dish(int orderID, int menuItemID, int sizeID, int Number, String Details) {
+    public DishImpl(int orderID, int menuItemID, int sizeID, int Number, String Details) {
         this.orderID = orderID;
         this.menuItemID = menuItemID;
         this.sizeID = sizeID;

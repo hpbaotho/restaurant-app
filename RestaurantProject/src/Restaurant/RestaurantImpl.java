@@ -7,7 +7,7 @@ package Restaurant;
  */
 
 
-public class Restaurant {
+public class RestaurantImpl {
     private int restaurantID;
     private String name;
     private String address;
@@ -15,7 +15,7 @@ public class Restaurant {
     private String city;
     private String phone;
     
-    public Restaurant(int restaurantID, String name, String address, String postalCode, String city, String phone) {
+    public RestaurantImpl(int restaurantID, String name, String address, String postalCode, String city, String phone) {
         this.restaurantID = restaurantID;
         this.name = name;
         this.address = address;
