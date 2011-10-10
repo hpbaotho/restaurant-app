@@ -1,2 +1,0 @@
-In addreservation:
-	show available tables, within a certain time span, when the time is chosen. Also show the timespan when the table is available.
