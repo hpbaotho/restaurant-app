@@ -4,12 +4,12 @@ package Restaurant;
  *
  * @author Martinsen
  */
-public class Category {
+public class CategoryImpl {
     
     private int categoryID;
     private String category;
     
-    public Category(int categoryID, String category) {
+    public CategoryImpl(int categoryID, String category) {
         this.categoryID = categoryID;
         this.category = category;
     }

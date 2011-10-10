@@ -4,11 +4,11 @@ package Restaurant;
  *
  * @author Ahmet Cinar
  */
-public class Extra {
+public class ExtraImpl {
     private String extraName;
     private int price;
     
-    public Extra(String extraName, int price){
+    public ExtraImpl(String extraName, int price){
         this.extraName = extraName;
         this.price = price;
     }

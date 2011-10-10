@@ -4,14 +4,14 @@ package Restaurant;
  *
  * @author Martinsen
  */
-public class MenuItem {
+public class MenuItemImpl {
     
     private int menuItemID;
     private String itemName;
     private int categoryID;
     private int price;
     
-    public MenuItem(int menuItemID, String itemName, int categoryID, int price) {
+    public MenuItemImpl(int menuItemID, String itemName, int categoryID, int price) {
         this.menuItemID = menuItemID;
         this.itemName = itemName;
         this.categoryID = categoryID;
