@@ -283,7 +283,7 @@
     		</LinearLayout>
 		</LinearLayout>    	
 	</LinearLayout>
-	<!-- Layout accesibilidad  -->
+	<!-- Navegability Layout-->
 	<LinearLayout 
 		android:orientation="vertical"
 		android:layout_weight="4.2"
