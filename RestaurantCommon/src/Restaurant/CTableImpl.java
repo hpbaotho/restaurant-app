@@ -4,7 +4,7 @@ package Restaurant;
  *
  * @author Ahmet Cinar
  */
-public class CTableImpl {
+public class CTableImpl implements CTable{
     private int cTableId;
     private int seats;
 
