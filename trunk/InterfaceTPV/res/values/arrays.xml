@@ -1,0 +1,11 @@
+<resources>
+    <string-array name="Waiters">
+        <item>Waiter 1</item>
+        <item>Waiter 2</item>
+        <item>Waiter 3</item>
+        <item>Waitress 1</item>
+        <item>Waitress 2</item>
+        <item>Waitress 3</item>
+        <item>Waitress 4</item>
+    </string-array>
+</resources>
