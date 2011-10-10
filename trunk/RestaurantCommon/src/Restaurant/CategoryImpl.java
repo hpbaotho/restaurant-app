@@ -4,7 +4,7 @@ package Restaurant;
  *
  * @author Martinsen
  */
-public class CategoryImpl {
+public class CategoryImpl implements Category{
     
     private int categoryID;
     private String category;
@@ -22,7 +22,7 @@ public class CategoryImpl {
         return category;
     }
     
-    private void setCategoryID (int catID) {
+    public void setCategoryID (int catID) {
         categoryID = catID;
     }
     
