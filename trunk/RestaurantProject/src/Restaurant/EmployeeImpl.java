@@ -4,15 +4,17 @@ package Restaurant;
  *
  * @author Ahmet Cinar
  */
-public class WaiterImpl {
-    private int waiterID;
+public class EmployeeImpl {
+    private int employeeID;
     private String name;
+    private String position;
     private String userName;
     private String password;
 
-    public WaiterImpl(int waiterID, String name, String userName, String password) {
-        this.waiterID = waiterID;
+    public EmployeeImpl(int waiterID, String name, String position, String userName, String password) {
+        this.employeeID = waiterID;
         this.name = name;
+        this.position = position;
         this.userName = userName;
         this.password = password;
     }
@@ -38,10 +40,10 @@ public class WaiterImpl {
     }
 
     public int getWaiterID() {
-        return waiterID;
+        return employeeID;
     }
 
     public void setWaiterID(int waiterID) {
-        this.waiterID = waiterID;
+        this.employeeID = waiterID;
     }
 }

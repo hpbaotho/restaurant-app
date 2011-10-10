@@ -1,22 +1,19 @@
 package Restaurant;
 
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+
 /**
  *
  * @author Roar
  */
-
-import java.rmi.RemoteException;
-import java.rmi.Remote;
-
-
-public interface Extra extends Remote
-{
-    void setExtraName(String extraName) throws RemoteException;
-        
-    void setPrice(int price) throws RemoteException;
-        
-    int getPrice() throws RemoteException;
-    
-    String getExtraName() throws RemoteException;
-    
+public interface Extra extends Remote {
+    void setExtraName(String extraName)
+            throws RemoteException;
+    void setPrice(int price)
+            throws RemoteException;
+    int getPrice()
+            throws RemoteException;
+    String getExtraName()
+            throws RemoteException;
 }
