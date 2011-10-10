@@ -4,13 +4,13 @@ package Restaurant;
  *
  * @author Ahmet Cinar
  */
-public class Waiter {
+public class WaiterImpl {
     private int waiterID;
     private String name;
     private String userName;
     private String password;
 
-    public Waiter(int waiterID, String name, String userName, String password) {
+    public WaiterImpl(int waiterID, String name, String userName, String password) {
         this.waiterID = waiterID;
         this.name = name;
         this.userName = userName;

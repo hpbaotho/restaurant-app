@@ -4,11 +4,11 @@ package Restaurant;
  *
  * @author Ahmet Cinar
  */
-public class CTable {
+public class CTableImpl implements CTable {
     private int cTableId;
     private int seats;
 
-    public CTable(int cTableId, int seats) {
+    public CTableImpl(int cTableId, int seats) {
         this.cTableId = cTableId;
         this.seats = seats;
     }

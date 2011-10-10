@@ -4,12 +4,12 @@ package Restaurant;
  *
  * @author Martinsen
  */
-public class Category {
+public class CategoryImpl implements Category {
     
     private int categoryID;
     private String category;
     
-    public Category(int categoryID, String category) {
+    public CategoryImpl(int categoryID, String category) {
         this.categoryID = categoryID;
         this.category = category;
     }
@@ -20,10 +20,6 @@ public class Category {
     
     public String getCategory() {
         return category;
-    }
-    
-    private void setCategoryID (int catID) {
-        categoryID = catID;
     }
     
     public int getCategoryID() {
