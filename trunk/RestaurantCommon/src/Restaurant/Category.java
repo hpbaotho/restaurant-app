@@ -12,7 +12,5 @@ public interface Category extends Remote{
     
     String getCategory() throws RemoteException;
     
-    void setCategoryID (int catID) throws RemoteException;
-    
     int getCategoryID() throws RemoteException;
 }
