@@ -38,6 +38,7 @@ public class Main {
             System.out.println(db.loadRestaurant());
         } catch (RemoteException | SQLException ex) {
             System.out.println("Not working");
+            ex.printStackTrace();
         }
     }
 }
