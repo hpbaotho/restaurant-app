@@ -92,11 +92,11 @@ public class CalendarApp {
         while(calendar.get(Calendar.DAY_OF_WEEK) != 2)
             calendar.add(Calendar.DAY_OF_MONTH, -1);
         String format = "|%3s ||%3d |%3d |%3d |%3d |%3d |%3d |%3d |\n";
-        System.out.println("|----------------------------------------|\n"
+        System.out.println("+----------------------------------------+\n"
                 + "|" + m.toPaddedString(year) + "|\n"
-                + "|----------------------------------------|\n"
+                + "+----------------------------------------+\n"
                 + "|Week|| Mo | Tu | We | Th | Fr | Sa | Su |\n"
-                + "|----||----|----|----|----|----|----|----|");
+                + "+----||----+----+----+----+----+----+----+");
         for (int i = 0; i < 6; i++) {
             int week = calendar.get(Calendar.WEEK_OF_YEAR);
             for (int j = 0; j < 7; j++) {
