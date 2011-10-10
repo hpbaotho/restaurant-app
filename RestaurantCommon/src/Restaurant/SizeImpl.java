@@ -4,11 +4,11 @@ package Restaurant;
  *
  * @author Rush
  */
-public class Size {
+public class SizeImpl {
     private int sizeID;
     private String sizeName;
     
-    public Size (int sizeID, String sizeName) {
+    public SizeImpl (int sizeID, String sizeName) {
         this.sizeID = sizeID;
         this.sizeName = sizeName;
     }

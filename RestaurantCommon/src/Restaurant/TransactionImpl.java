@@ -4,7 +4,7 @@ package Restaurant;
  *
  * @author Ahmet Cinar
  */
-public class Transaction {
+public class TransactionImpl {
     private int paymentID;
     private int orderID;
     private String creditCardType;
@@ -17,7 +17,7 @@ public class Transaction {
     private String state;
     private int postalCode;
 
-    public Transaction(int paymentID, int orderID, String creditCardType, int creditCardNumber, int expirationDate, String nameOnCard, String address, String country, String city, String state, int postalCode){
+    public TransactionImpl(int paymentID, int orderID, String creditCardType, int creditCardNumber, int expirationDate, String nameOnCard, String address, String country, String city, String state, int postalCode){
         this.paymentID = paymentID;
         this.orderID = orderID;
         this.creditCardType = creditCardType;
