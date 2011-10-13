@@ -29,7 +29,8 @@ public class Main {
 
         Database db = null;
         try {
-            db = (Database) Naming.lookup("rmi://158.38.14.25/" + "Database");
+//            db = (Database) Naming.lookup("rmi://158.38.14.25/Database");
+            db = (Database) Naming.lookup("rmi://localhost/Database");
             LOG.info("Server connection ready. Databaseconnection active.");
         } catch (NotBoundException | MalformedURLException | RemoteException ex) {
             LOG.log(Level.SEVERE, "Client exception: " + ex.toString(), ex);
