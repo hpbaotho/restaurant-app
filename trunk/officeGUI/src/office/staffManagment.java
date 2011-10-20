@@ -8,6 +8,12 @@ package office;
 
 import com.sun.java.swing.plaf.windows.resources.windows;
 import com.sun.org.apache.xalan.internal.xsltc.trax.SAX2StAXBaseWriter;
+import java.awt.ItemSelectable;
+import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,9 +22,39 @@ import com.sun.org.apache.xalan.internal.xsltc.trax.SAX2StAXBaseWriter;
 public class staffManagment extends javax.swing.JFrame {
 
     /** Creates new form staffManagment */
-    public staffManagment() {
+    public staffManagment() throws ClassNotFoundException {
         initComponents();
+        fetchForJC();
+        
+        
     }
+    
+    public void fetchForJC() throws ClassNotFoundException {
+    
+    jComboBox1.addItem("(Choose)");
+    try {
+        Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+        String connectionUrl = "jdbc:sqlserver://localhost:1433;" +
+            "databaseName=restaurantDB;user=erdnis;password=w810ijah23;";
+        Connection con = DriverManager.getConnection(connectionUrl);
+          Statement stmt = null;
+            ResultSet rs = null;
+    String SQL = "SELECT EmployeeID, firstName, Surname FROM Employee";
+  
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(SQL);
+    while (rs.next()){
+    jComboBox1.addItem(rs.getString(1));
+    }
+    rs.close();
+    stmt.close();
+    } catch (SQLException e) {
+    e.printStackTrace();
+    }
+  
+    
+    }
+   
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -44,18 +80,23 @@ public class staffManagment extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/officeGUI/resources/logo.png"))); // NOI18N
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18));
         jLabel2.setText("Choose employee");
 
         jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jComboBox1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBox1ItemStateChanged(evt);
+            }
+        });
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18));
         jLabel3.setText("Name");
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel4.setText("EmployeeID");
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18));
+        jLabel4.setText("Position");
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButton1.setFont(new java.awt.Font("Tahoma", 0, 18));
         jButton1.setText("Add employee");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -65,8 +106,13 @@ public class staffManagment extends javax.swing.JFrame {
 
         jButton2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton2.setText("Delete employee");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
-        jButton3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButton3.setFont(new java.awt.Font("Tahoma", 0, 18));
         jButton3.setText("Cancel");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -138,6 +184,45 @@ public class staffManagment extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         new addEmployee().setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
+//EVENTLISTENER FOR JCOMBOBOX
+    private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
+         
+
+ItemSelectable is = (ItemSelectable)evt.getSource();
+String st= selectedString(is);
+try{
+Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+String connectionUrl = "jdbc:sqlserver://localhost:1433;" +
+            "databaseName=restaurantDB;user=erdnis;password=w810ijah23;";
+        Connection con = DriverManager.getConnection(connectionUrl);
+Statement stmt=con.createStatement();
+ResultSet rs=stmt.executeQuery("select * from Employee where EmployeeID='"+st+"'");
+String firstName=null;
+String Surname = null;
+String position = null;
+while(rs.next()){
+firstName=rs.getString("firstName");
+Surname=rs.getString("Surname");
+position=rs.getString("Position");
+
+
+jTextField2.setText(firstName+" "+Surname);
+jTextField1.setText(position);
+}} catch(Exception ex){}
+    
+    }
+
+static private String selectedString(ItemSelectable is) {
+Object selected[] = is.getSelectedObjects();
+return ((selected.length == 0) ? "null" : (String)selected[0]);
+
+    
+    
+    }//GEN-LAST:event_jComboBox1ItemStateChanged
+//DELETE BUTTON
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -170,7 +255,12 @@ public class staffManagment extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
-                new staffManagment().setVisible(true);
+                try {
+                    new staffManagment().setVisible(true);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(staffManagment.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
             }
         });
     }

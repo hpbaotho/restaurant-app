@@ -6,6 +6,9 @@
  */
 package office;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Sindre
@@ -144,7 +147,11 @@ public class officeMainMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     //STAFFMANAGEMENT-button
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        new staffManagment().setVisible(true);
+        try {
+            new staffManagment().setVisible(true);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(officeMainMenu.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
     //FOODMENU-button
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
