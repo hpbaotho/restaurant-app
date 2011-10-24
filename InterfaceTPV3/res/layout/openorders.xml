@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout android:orientation="vertical"
+    android:background="@drawable/background" xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="wrap_content" android:layout_height="match_parent">
+	<!-- Title layout --> 
+	<LinearLayout
+		android:orientation="vertical"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:layout_weight="4.2">
+		<!-- Title -->
+		<TextView  
+			android:id="@+id/SectorInsideTitle"
+			android:layout_width="fill_parent" 
+			android:layout_height="fill_parent" 
+			android:gravity="center"
+			android:textColor="#6e0404"
+			android:textSize="15pt"
+			android:text="Open orders"/>
+	</LinearLayout>
+	<!-- Content layout -->
+	<LinearLayout
+		android:orientation="vertical"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:layout_weight="1">
+		<!-- Order list -->
+		<LinearLayout
+			android:orientation="vertical"
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent"
+			android:layout_weight="1">
+			<!-- Table with the order information -->
+			<TableLayout
+    			xmlns:android="http://schemas.android.com/apk/res/android"
+    			android:layout_width="fill_parent"
+    			android:layout_height="fill_parent"
+    			android:stretchColumns="1"
+    			android:background="#FFFFFF">
+    			<TableRow>
+    				<!-- Fix this hack -->
+        			<TextView 
+        				android:text="OrderID      " 
+        				android:textSize="9pt"
+        				android:textColor="#000000"
+        				android:background="@drawable/tablebackground"/>
+        			<TextView
+        				android:text="Table"
+        				android:textSize="9pt"
+        				android:textColor="#000000"
+        				android:background="@drawable/tablebackground"/>
+        			<TextView
+        				android:text="Total        "
+        				android:textSize="9pt"
+        				android:textColor="#000000"
+        				android:background="@drawable/tablebackground"/>
+        	    </TableRow>
+			    <TableRow>
+        			<TextView android:text="#00001" />
+        			<TextView android:text="4"/>
+        			<TextView android:text="$28.44"/>
+    			</TableRow>
+ 			    <TableRow>
+        			<TextView android:text="#00002" />
+        			<TextView android:text="12"/>
+        			<TextView android:text="$17.19"/>
+    			</TableRow>
+ 			</TableLayout>
+		</LinearLayout>
+	</LinearLayout>
+	<!-- Accesibility layout -->
+	<LinearLayout
+		android:orientation="horizontal"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:layout_weight="4.2">
+		<!-- Select button layout -->
+		<LinearLayout
+			android:orientation="vertical"
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent"
+			android:layout_weight="1">
+			<!-- Select button -->
+			<Button
+				android:id="@+id/bViewDetails"
+				android:layout_height="fill_parent"
+				android:layout_width="fill_parent" 
+    			android:layout_weight="1"
+    			android:text="View Details"/>
+		</LinearLayout>
+		<!-- Cancel button layout -->
+		<LinearLayout
+			android:orientation="vertical"
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent"
+			android:layout_weight="1">
+			<!-- Cancel button -->
+			<Button
+				android:id="@+id/bBack"
+				android:layout_height="fill_parent"
+				android:layout_width="fill_parent" 
+    			android:layout_weight="1"
+    			android:text="Back"/>
+		</LinearLayout>
+	</LinearLayout>
+</LinearLayout>
