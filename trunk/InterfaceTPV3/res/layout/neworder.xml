@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/background"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+	 
+	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    	android:orientation="vertical"
+    	android:layout_width="fill_parent"
+		android:layout_weight="1"
+		android:layout_height="fill_parent"
+	>
+		<!-- Title -->
+		<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    		android:orientation="horizontal"
+    		android:layout_weight="1"
+    		android:layout_width="fill_parent"
+			android:layout_height="fill_parent"
+			>
+	 		<TextView  
+			android:layout_width="fill_parent" 
+			android:layout_height="fill_parent" 
+			android:gravity="center"
+			android:textColor="#6e0404"
+			android:textSize="12pt"
+			android:id="@+id/NewOrder_title"
+			android:text="New Order"/>
+		</LinearLayout>
+		
+		<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    		android:orientation="horizontal"
+    		android:layout_weight="1"
+    		android:layout_width="fill_parent"
+			android:layout_height="fill_parent"
+			>
+			<Button
+			android:id="@+id/ButtonDishes"
+			android:layout_height="fill_parent" 	    	
+			android:layout_weight="1"
+    		android:layout_width="fill_parent" 
+    		android:text="Dishes"
+    		android:textSize="10pt"
+    		/>
+		</LinearLayout>
+		<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    		android:orientation="horizontal"
+    		android:layout_weight="1"
+    		android:layout_width="fill_parent"
+			android:layout_height="fill_parent"
+			> 
+			<Button
+				android:id="@+id/ButtonBeverages"
+				android:layout_height="fill_parent" 	    	
+				android:layout_weight="1"
+    			android:layout_width="fill_parent" 
+    			android:text="Beverages"
+    			android:textSize="10pt"
+    		/>
+		</LinearLayout>
+		<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    		android:orientation="horizontal"
+    		android:layout_weight="1"
+    		android:layout_width="fill_parent"
+			android:layout_height="fill_parent"
+			>
+		<Button
+			android:id="@+id/ButtonExtra"
+			android:layout_height="fill_parent" 	    	
+			android:layout_weight="1"
+    		android:layout_width="fill_parent" 
+    		android:text="Extra"
+    		android:textSize="10pt"
+    	/>
+		</LinearLayout>
+	</LinearLayout>
+		<Button
+			android:id="@+id/BackSS"
+			android:layout_height="fill_parent" 	    	
+			android:layout_weight="1"
+    		android:layout_width="fill_parent" 
+    		android:text="Back"
+    		android:textSize="10pt"
+    	/>
+</LinearLayout>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Loading Chino Restaurant</string>
+    <string name="app_name">Chino Restaurant</string>
+	<string name="copyright">All rights reserver 2011 - Chino Restaurant</string>
+	<string name="description">This is an application for the &quot; Information System Development&quot; subject</string>
+	<string name="user">Username</string>
+	<string name="pass">Password</string>
+	<string name="userdsc">Username</string>
+	<string name="passdsc">Password</string>
+	<string name="waiter_prompt">Choose a waiter</string>
+	<string name="sizes_prompt">Choose a size</string>
+</resources>
