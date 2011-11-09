@@ -7,6 +7,8 @@ import java.awt.event.*;
 import java.util.*;
 import javax.swing.*;
 import javax.swing.GroupLayout.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import static javax.swing.UIManager.*;
 
 /**
@@ -73,9 +75,7 @@ public class CalendarPanel extends JPanel {
     private JToggleButton[][] dayButton;
     private Calendar[][] dayArray;
     private Map<Month, Calendar[][]> dayArrayMap;
-    private Map<Month, JToggleButton[][]> dayButtonMap;
-    private Map<String, Map/*<Month, Calendar[][]>*/> yearMap;
-    private Map<String, Map/*<Month, JToggleButton[][]>*/> yearButtonMap;
+    private Map<String, Map<Month, Calendar[][]>> yearMap;
     private int ii;
     private int ij;
 
@@ -87,7 +87,7 @@ public class CalendarPanel extends JPanel {
         //<editor-fold defaultstate="collapsed" desc="Setup components">
         now = new GregorianCalendar();
         Calendar temp = new GregorianCalendar(now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH));
-        chosen = now;
+        chosen = new GregorianCalendar(now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH));
         mon = now.get(Calendar.MONTH);
         month = monthSwitch(mon);
         year = now.get(Calendar.YEAR);
@@ -98,26 +98,43 @@ public class CalendarPanel extends JPanel {
         mComboBox.setMaximumSize(M_COMBO_BOX_DIM);
         mComboBox.setPreferredSize(M_COMBO_BOX_DIM);
         mComboBox.addActionListener(new PanelListener());
-        mSpinner = new JSpinner(new SpinnerNumberModel(mon, 0, 11, 1));
+        mSpinner = new JSpinner(new SpinnerNumberModel(mon, -1, 12, 1));
         mSpinner.setMinimumSize(M_SPINNER_DIM);
         mSpinner.setMaximumSize(M_SPINNER_DIM);
         mSpinner.setPreferredSize(M_SPINNER_DIM);
         mSpinner.enableInputMethods(false);
+        mSpinner.addChangeListener(new ChangeListener() {
+
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                int index = (int) mSpinner.getValue();
+                if(index == -1)
+                    ySpinner.setValue(11);
+                if(index == 12)
+                    ySpinner.setValue(0);
+                mComboBox.setSelectedIndex(index);
+            }
+        });
         ySpinner = new JSpinner(new SpinnerNumberModel(year, 2010, 2015, 1));
         ySpinner.setMinimumSize(Y_SPINNER_DIM);
         ySpinner.setMaximumSize(Y_SPINNER_DIM);
         ySpinner.setPreferredSize(Y_SPINNER_DIM);
         ySpinner.enableInputMethods(false);
+        ySpinner.addChangeListener(new ChangeListener() {
+
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                setUpMonth((int) mSpinner.getValue(), (int) ySpinner.getValue());
+            }
+        });
         showToday = new JButton("Show today");
         showToday.addActionListener(new PanelListener());
         showToday.setMinimumSize(BUTTON_DIM);
-        showToday.setMaximumSize(new Dimension(150, 30));
+        showToday.setMaximumSize(new Dimension(200, 30));
         dayButton = new JToggleButton[6][7];
         dayArray = new Calendar[6][7];
         dayArrayMap = new HashMap<>();
-        dayButtonMap = new HashMap<>();
         yearMap = new HashMap<>();
-        yearButtonMap = new HashMap<>();
         week = new JLabel[6];
         ii = -1;
         ij = -1;
@@ -129,16 +146,14 @@ public class CalendarPanel extends JPanel {
             temp.add(Calendar.DAY_OF_MONTH, -1);
         }
         for (int i = 0; i < 7; i++) {
-            days[i].setHorizontalAlignment(JLabel.CENTER);
             days[i].setMaximumSize(LABEL_DIM);
             days[i].setMinimumSize(LABEL_DIM);
             days[i].setPreferredSize(LABEL_DIM);
         }
         for (int i = 0; i < 6; i++) {
             week[i] = new JLabel("    " + temp.get(Calendar.WEEK_OF_YEAR) + "    ");
-            week[i].setVerticalAlignment(JLabel.CENTER);
             for (int j = 0; j < 7; j++) {
-                dayArray[i][j] = temp;
+                dayArray[i][j] = new GregorianCalendar(temp.get(Calendar.YEAR), temp.get(Calendar.MONTH), temp.get(Calendar.DAY_OF_MONTH));
                 dayButton[i][j] = new JToggleButton();
                 dayButton[i][j].setText(temp.get(Calendar.DAY_OF_MONTH) + "");
 //                dayButton[i][j].setMargin(BUTTON_INSETS);
@@ -158,9 +173,7 @@ public class CalendarPanel extends JPanel {
             }
         }
         dayArrayMap.put(month, dayArray);
-        dayButtonMap.put(month, dayButton);
         yearMap.put(year + "", dayArrayMap);
-        yearButtonMap.put(year + "", dayButtonMap);
         //</editor-fold>
 
         GroupLayout layout = new GroupLayout(this);
@@ -316,29 +329,24 @@ public class CalendarPanel extends JPanel {
     }
     
     private void setUpMonth(Calendar temp) {
+        int tMon = temp.get(Calendar.MONTH);
         if (yearMap.containsKey(temp.get(Calendar.YEAR) + "")) {
             dayArrayMap = yearMap.get(temp.get(Calendar.YEAR) + "");
-            dayButtonMap = yearButtonMap.get(temp.get(Calendar.YEAR) + "");
-            if (dayArrayMap.containsKey(monthSwitch(temp.get(Calendar.MONTH)))) {
-                dayArray = dayArrayMap.get(monthSwitch(temp.get(Calendar.MONTH)));
-                dayButton = dayButtonMap.get(monthSwitch(temp.get(Calendar.MONTH)));
+            if (dayArrayMap.containsKey(monthSwitch(tMon))) {
+                dayArray = dayArrayMap.get(monthSwitch(tMon));
             } else {
                 dayArray = new Calendar[6][7];
-                dayButton = new JToggleButton[6][7];
                 setUpDays(temp);
             }
         }
         else {
             dayArrayMap = new HashMap<>();
-            dayButtonMap = new HashMap<>();
             dayArray = new Calendar[6][7];
-            dayButton = new JToggleButton[6][7];
             setUpDays(temp);
         }
-        dayArrayMap.put(monthSwitch(temp.get(Calendar.MONTH)), dayArray);
-        dayButtonMap.put(monthSwitch(temp.get(Calendar.MONTH)), dayButton);
+        setUpButtons(dayArray, tMon);
+        dayArrayMap.put(monthSwitch(tMon), dayArray);
         yearMap.put(temp.get(Calendar.YEAR) + "", dayArrayMap);
-        yearButtonMap.put(temp.get(Calendar.YEAR) + "", dayButtonMap);
     }
     
     private void setUpMonth(int m, int y) {
@@ -346,33 +354,38 @@ public class CalendarPanel extends JPanel {
     }
     
     private void setUpDays(Calendar temp) {
-        if (ii != -1 && ij != -1)
-            dayButton[ii][ij].setSelected(false);
-        int tMon = temp.get(Calendar.MONTH);
+//        if (ii != -1 && ij != -1)
+//            dayButton[ii][ij].setSelected(false);
         temp.set(Calendar.DAY_OF_MONTH, 1);
         while (temp.get(Calendar.DAY_OF_WEEK) != 2)
             temp.add(Calendar.DAY_OF_MONTH, -1);
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 7; j++) {
-                dayArray[i][j] = temp;
-                dayButton[i][j].setText(temp.get(Calendar.DAY_OF_MONTH) + "");
-                dayButton[i][j].setEnabled(temp.get(Calendar.MONTH) == tMon);
-                dayButton[i][j].setActionCommand(i + " " + j);
-                if (temp.get(Calendar.MONTH) == now.get(Calendar.MONTH) && temp.get(Calendar.DAY_OF_MONTH) == now.get(Calendar.DAY_OF_MONTH)) {
+                dayArray[i][j] = new GregorianCalendar(temp.get(Calendar.YEAR), temp.get(Calendar.MONTH), temp.get(Calendar.DAY_OF_MONTH));
+                temp.add(Calendar.DAY_OF_MONTH, 1);
+            }
+        }
+    }
+    
+    private void setUpButtons(Calendar[][] temp, int tMon) {
+        for (int i = 0; i < 6; i++) {
+            week[i].setText("    " + temp[i][0].get(Calendar.WEEK_OF_YEAR) + "    ");
+            for (int j = 0; j < 7; j++) {
+                dayButton[i][j].setText(temp[i][j].get(Calendar.DAY_OF_MONTH) + "");
+                dayButton[i][j].setEnabled(temp[i][j].get(Calendar.MONTH) == tMon);
+                if (temp[i][j].get(Calendar.YEAR) == now.get(Calendar.YEAR)
+                        && temp[i][j].get(Calendar.MONTH) == now.get(Calendar.MONTH)
+                        && temp[i][j].get(Calendar.DAY_OF_MONTH) == now.get(Calendar.DAY_OF_MONTH)) {
                     dayButton[i][j].doClick();
                     ii = i;
                     ij = j;
                 }
-                temp.add(Calendar.DAY_OF_MONTH, 1);
             }
         }
-        for (int i = 0; i < 6; i++) {
-            week[i].setText("    " + temp.get(Calendar.WEEK_OF_YEAR) + "    ");
-            week[i].setVerticalAlignment(JLabel.CENTER);
-            for (int j = 0; j < 7; j++) {
-                
-            }
-        }
+    }
+    
+    public Calendar getChosenDate() {
+        return chosen;
     }
 
     private Month monthSwitch(int m) {
@@ -408,18 +421,16 @@ public class CalendarPanel extends JPanel {
                 mSpinner.setValue(index);
                 setUpMonth(index, (int) ySpinner.getValue());
             } else {
-                dayButton[ii][ij].setSelected(false);
+                if (ii != -1 || ij != -1)
+                    dayButton[ii][ij].setSelected(false);
                 String[] index = e.getActionCommand().split(" ");
                 ii = Integer.parseInt(index[0]);
                 ij = Integer.parseInt(index[1]);
                 chosen = dayArray[ii][ij];
-                System.out.println("[" + ii + "][" + ij + "]");
             }
         }
     }
     
-//    private class 
-
     public static void main(String args[]) {
         try {
             for (LookAndFeelInfo info : getInstalledLookAndFeels()) {
